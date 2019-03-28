@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
     StyleSheet,
     Text,
@@ -9,35 +9,51 @@ import {
     Image,
     Alert
 } from 'react-native';
+import { Constants } from 'expo';
 
-export default class LinksScreen extends React.Component {
+import IconHouse from '../assets/images/domotics.png'
+
+export default class LoginScreen extends React.Component {
     static navigationOptions = {
-        title: 'Login',
+        title: "Login",
     };
 
     constructor(props) {
         super(props);
-        state = {
+        this.state = {
             email: '',
             password: '',
         }
     }
 
-    onClickListener = (viewId) => {
-        if(viewId == 'login') {
-            if(this.state.email == 'user' && this.state.password == '123') {
-                this.props.navigation.navigate('Main');
-            }
-            else {
-                Alert.alert("Alert", "Incorrect Credentials");
-            }
+    _handleEmailChange = (event) => {
+        this.setState({
+            email: event.nativeEvent.text
+        })
+    }
+
+    _handlePasswordChange = (event) => {
+        this.setState({
+            password: event.nativeEvent.text
+        })
+    }
+
+    _onClickListener = () => {
+        if (this.state.email == 'user' && this.state.password == '123') {
+            this.props.navigation.navigate('Main');
         }
+        else {
+            Alert.alert("Alert", "Incorrect Credentials");
+        }
+
     }
 
 
     render() {
+        const { params } = this.props.navigation.state
         return (
             <View style={styles.container}>
+                <Image source={IconHouse} style={styles.logo} />
                 <Text style={styles.headerText}>Smart Switches</Text>
                 <View style={styles.inputContainer}>
                     <Image style={styles.inputIcon} source={{ uri: 'https://png.icons8.com/message/ultraviolet/50/3498db' }} />
@@ -45,7 +61,8 @@ export default class LinksScreen extends React.Component {
                         placeholder="Email"
                         keyboardType="email-address"
                         underlineColorAndroid='transparent'
-                        onChangeText={(email) => this.setState({ email })} />
+                        value={this.state.email}
+                        onChange={this._handleEmailChange} />
                 </View>
 
                 <View style={styles.inputContainer}>
@@ -54,19 +71,20 @@ export default class LinksScreen extends React.Component {
                         placeholder="Password"
                         secureTextEntry={true}
                         underlineColorAndroid='transparent'
-                        onChangeText={(password) => this.setState({ password })} />
+                        value={this.state.password}
+                        onChange={this._handlePasswordChange} />
                 </View>
 
-                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
+                <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this._onClickListener}>
                     <Text style={styles.loginText}>Login</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
-                    <Text>Forgot your password?</Text>
+                <TouchableHighlight style={styles.buttonContainer} >
+                    <Text style={{ color: 'white' }}>Forgot your password?</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
-                    <Text>Register</Text>
+                <TouchableHighlight style={styles.buttonContainer} >
+                    <Text style={{ color: 'white' }}>Register</Text>
                 </TouchableHighlight>
             </View>
         );
@@ -77,7 +95,14 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#DCDCDC',
+        backgroundColor: '#2080B7',
+    },
+    logo: {
+        height: 150,
+        width: 200,
+        alignItems: "center",
+        justifyContent: "space-between"
+
     },
     inputContainer: {
         borderBottomColor: '#F5FCFF',
@@ -117,10 +142,10 @@ const styles = StyleSheet.create({
     loginText: {
         color: 'white',
     },
-    headerText:{
-        color: 'black',
+    headerText: {
+        color: 'white',
         justifyContent: 'center',
-        margin:30,
+        margin: 30,
         fontSize: 30,
-    }
+    },
 });

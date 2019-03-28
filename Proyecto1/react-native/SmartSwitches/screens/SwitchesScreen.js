@@ -11,9 +11,9 @@ import {
 
 import { List, ListItem } from 'react-native-elements'
 
-export default class LinkScreen extends React.Component {
+export default class SwitchesScreen extends React.Component {
   static navigationOptions = {
-    title: "Rutinas",
+    title: "Switches",
   };
   constructor(props) {
     super(props);
@@ -36,44 +36,43 @@ export default class LinkScreen extends React.Component {
   renderRightElement() {
     return (
       <View>
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this._onClickListener}>
-                    <Text style={styles.loginText}>Edit</Text>
-                </TouchableHighlight>
+        <Switch
+          value={false}/>
       </View>
     );
   }
   render() {
     return (
       <View style={styles.container}>
-      <FlatList      
+      <FlatList          
         data={[
           {
             name: "Switch 1",
-            subtitle: "Activado L y M - 7 am a 8am"
+            subtitle: "Ubicado en la sala"
           },
           {
             name: "Switch 2",
-            subtitle: "Activado L y M - 7 am a 8am"
+            subtitle: "Ubicado en el cuarto principal"
           },
           {
             name: "Switch 3",
-            subtitle: "Activado L y M - 7 am a 8am"
+            subtitle: "Ubicado en la cocina"
           },
           {
             name: "Switch 4",
-            subtitle: "Activado L y M - 7 am a 8am"
+            subtitle: "Ubicado en el patio"
           },
           {
             name: "Switch 5",
-            subtitle: "Activado L y M - 7 am a 8am"
+            subtitle: "Refrigeradora"
           },
           {
             name: "Switch 6",
-            subtitle: "Activado L y M - 7 am a 8am"
+            subtitle: "Sensores"
           }
         ]}          
         renderItem={({ item }) => ( 
-          <ListItem               
+          <ListItem                   
             title={item.name}
             subtitle={item.subtitle}            
             containerStyle={{ borderBottomWidth: 0 }} 
@@ -96,22 +95,5 @@ export default class LinkScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2080B7',
-  },
-
-  buttonContainer: {
-    height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    width: 60,
-    borderRadius: 30,
-},
-loginButton: {
-    backgroundColor: "#00b5ec",
-},
-
-loginText: {
-  color: 'white',
-},
+  }
 });
