@@ -12,9 +12,12 @@ import {
 import { List, ListItem } from 'react-native-elements'
 
 export default class SwitchesScreen extends React.Component {
+  
   static navigationOptions = {
     title: "Switches",
   };
+
+
   constructor(props) {
     super(props);
     this.state = {
