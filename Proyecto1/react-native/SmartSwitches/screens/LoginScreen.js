@@ -9,13 +9,13 @@ import {
     Image,
     Alert
 } from 'react-native';
-import { Constants } from 'expo';
 
 import IconHouse from '../assets/images/domotics.png'
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
         title: "Login",
+        header:null,
     };
 
     constructor(props) {
@@ -50,7 +50,6 @@ export default class LoginScreen extends React.Component {
 
 
     render() {
-        const { params } = this.props.navigation.state
         return (
             <View style={styles.container}>
                 <Image source={IconHouse} style={styles.logo} />

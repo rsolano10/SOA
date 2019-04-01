@@ -1,9 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
-
-import { List, ListItem } from 'react-native-elements'
-
 import TabBarIcon from '../components/TabBarIcon';
 import SwitchesScreen from '../screens/SwitchesScreen';
 import LinksScreen from '../screens/LinksScreen';
@@ -11,7 +8,6 @@ import LinksScreen from '../screens/LinksScreen';
 const SwitchesScreenStack = createStackNavigator({
   SwitchesScreen: SwitchesScreen,
 });
-
 
 SwitchesScreenStack.navigationOptions = {
   tabBarLabel: 'Switches',
@@ -25,6 +21,7 @@ SwitchesScreenStack.navigationOptions = {
       }
     />
   ),
+  header:null,
 };
 
 const LinksStack = createStackNavigator({
@@ -40,7 +37,6 @@ LinksStack.navigationOptions = {
     />
   ),
 };
-
 
 export default createBottomTabNavigator({
   SwitchesScreenStack,

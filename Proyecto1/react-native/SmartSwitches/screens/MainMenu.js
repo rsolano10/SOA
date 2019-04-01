@@ -12,6 +12,10 @@ import Settings from '../assets/images/settings.png'
 export default class MainMenu extends React.Component {
     static navigationOptions = {
         title: 'Main Menu',
+        headerStyle: {
+            backgroundColor: '#f4511e',
+        },
+        headerTintColor: '#fff',
     };
 
     constructor() {
@@ -31,20 +35,20 @@ export default class MainMenu extends React.Component {
     }
 
     _onClickListener = (data) => {
-        if(data==1){
+        if (data == 1) {
             this.props.navigation.navigate('Switches');
 
-        }else{
+        } else {
             this.props.navigation.navigate('Settings');
         }
-      }
+    }
 
 
     render() {
         return (
             <View style={styles.MainContainer}>
                 <View style={styles.box}>
-                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.5} onPress={()=>this._onClickListener(1)}>
+                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.5} onPress={() => this._onClickListener(1)}>
                         <Image
                             source={Switch}
                             style={styles.ImageIconStyle}
@@ -52,7 +56,7 @@ export default class MainMenu extends React.Component {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.box}>
-                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.5} onPress={()=>this._onClickListener(2)}>
+                    <TouchableOpacity style={styles.buttonStyle} activeOpacity={0.5} onPress={() => this._onClickListener(2)}>
                         <Image
                             source={Settings}
                             style={styles.ImageIconStyle}

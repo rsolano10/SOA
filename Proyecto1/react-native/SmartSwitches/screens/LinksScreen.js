@@ -1,7 +1,5 @@
 import React from 'react';
 import {
-  Platform,
-  Switch,
   FlatList,
   StyleSheet,
   Text,
@@ -9,11 +7,12 @@ import {
   View,
 } from 'react-native';
 
-import { List, ListItem } from 'react-native-elements'
+import { ListItem } from 'react-native-elements'
 
 export default class LinkScreen extends React.Component {
   static navigationOptions = {
     title: "Rutinas",
+    header:null,
   };
   constructor(props) {
     super(props);
@@ -36,7 +35,7 @@ export default class LinkScreen extends React.Component {
   renderRightElement() {
     return (
       <View>
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={this._onClickListener}>
+        <TouchableHighlight style = {[styles.buttonContainer, styles.loginButton]} onPress = {this._onClickListener}>
                     <Text style={styles.loginText}>Edit</Text>
                 </TouchableHighlight>
       </View>
@@ -44,9 +43,9 @@ export default class LinkScreen extends React.Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style = {styles.container}>
       <FlatList      
-        data={[
+        data = {[
           {
             name: "Switch 1",
             subtitle: "Activado L y M - 7 am a 8am"
@@ -72,7 +71,7 @@ export default class LinkScreen extends React.Component {
             subtitle: "Activado L y M - 7 am a 8am"
           }
         ]}          
-        renderItem={({ item }) => ( 
+        renderItem = {({ item }) => ( 
           <ListItem               
             title={item.name}
             subtitle={item.subtitle}            
