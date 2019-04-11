@@ -11,11 +11,13 @@ import {
 } from 'react-native';
 
 import IconHouse from '../assets/images/domotics.png'
+import { login } from '../networking/Server'
+
 
 export default class LoginScreen extends React.Component {
     static navigationOptions = {
         title: "Login",
-        header:null,
+        header: null,
     };
 
     constructor(props) {
@@ -39,12 +41,15 @@ export default class LoginScreen extends React.Component {
     }
 
     _onClickListener = () => {
-        if (this.state.email == 'user' && this.state.password == '123') {
-            this.props.navigation.navigate('Main');
-        }
-        else {
-            Alert.alert("Alert", "Incorrect Credentials");
-        }
+        login(this.state.email, this.state.password).then((result) => {
+            if (result == false) {
+                Alert.alert("Alert", "Incorrect Credentials");
+            } else if (result == true) {
+                this.props.navigation.navigate('Main');
+            } else {
+                Alert.alert("Error", "Server Communication Error");
+            }
+        })
 
     }
 
