@@ -6,7 +6,7 @@ var app = express();                 // define our app using express
 //Body Parser
 var bodyParser = require('body-parser');
 app.use(bodyParser({limit: '50mb'})); // extiende el limite de MB del cuerpo de la consulta
-app.use(bodyParser.urlencoded({extended: true})); // habilita el url encoded
+app.use(bodyParser.urlencoded({ extended: true })); // habilita el url encoded
 app.use(bodyParser.json({limit: '50mb'})); // extiende el limite de transferencia de objetos JSON
 //#####
 
@@ -54,6 +54,9 @@ testRoute(app);
 
 var userRoute = require('./Routes/UserRoute');
 userRoute(app);
+
+var arduinoRoute = require('./Routes/ArduinoRoute');
+arduinoRoute(app);
 //#####
 
 

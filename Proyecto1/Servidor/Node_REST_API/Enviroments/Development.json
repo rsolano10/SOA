@@ -15,5 +15,6 @@
         "user": "root",
         "password": "dubyduby",
         "database":"soa"
-    }
+    },
+    "arduinoIP":"192.168.1.23"
 }
