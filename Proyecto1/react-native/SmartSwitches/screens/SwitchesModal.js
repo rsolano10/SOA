@@ -14,7 +14,7 @@ export default class SwitchesModal extends Component {
         super(props)
         this.state = {
             switchName: '',
-            switchLocation: 's'
+            switchLocation: ''
         }
     }
 

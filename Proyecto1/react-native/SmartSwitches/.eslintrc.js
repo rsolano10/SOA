@@ -1,23 +1,28 @@
+const path = require('path')
+
 module.exports = {
-    "env": {
-        "browser": true,
-        "es6": true
+  extends: ['react-app', 'airbnb',],
+  rules: {
+    'react/prop-types': 0,
+    'template-curly-spacing': 0,
+    indent: 0,
+    semi: ['error', 'never'],
+    'no-alert': 0,
+    'import/prefer-default-export': 0,
+    'react/destructuring-assignment': [2, 'always', { ignoreClassFields: true }],
+    'react/jsx-filename-extension': 0,
+    'global-require': 0,
+    'no-useless-escape': 0,
+    'template-curly-spacing': 0,
+    indent: 0,
+    'no-restricted-syntax': ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js'],
+        moduleDirectory: ['node_modules', 'src'],
+      },
     },
-    "extends": "eslint:recommended",
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-    }
-};
+  }
+}

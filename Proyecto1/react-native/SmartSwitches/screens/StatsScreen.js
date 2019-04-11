@@ -8,16 +8,14 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-
 import { List, ListItem } from 'react-native-elements'
 
 export default class StatsScreen extends React.Component {
-  
+
   static navigationOptions = {
     title: "Statistics",
-    header:null,
+    header: null,
   };
-
 
   constructor(props) {
     super(props);
@@ -44,31 +42,28 @@ export default class StatsScreen extends React.Component {
       </View>
     );
   }
+
   render() {
     return (
       <View style={styles.container}>
-      <FlatList          
-        data={this.state.data}          
-        renderItem={({ item }) => ( 
-          <ListItem                   
-            title={item.name}
-            subtitle={item.subtitle}            
-            containerStyle={{ borderBottomWidth: 0 }} 
-            rightElement={this.renderRightElement(item.current)}
-           /> 
-                    
-         )}      
-             
-         keyExtractor={item => item.name}  
-         ItemSeparatorComponent={this.renderSeparator} 
-         ListHeaderComponent={this.renderHeader}  
-                                    
-      /> 
-      </View>     
+        <FlatList
+          data={this.state.data}
+          renderItem={({ item }) => (
+            <ListItem
+              title={item.name}
+              subtitle={item.subtitle}
+              containerStyle={{ borderBottomWidth: 0 }}
+              rightElement={this.renderRightElement(item.current)}
+            />
+          )}
+          keyExtractor={item => item.name}
+          ItemSeparatorComponent={this.renderSeparator}
+          ListHeaderComponent={this.renderHeader}
+        />
+      </View>
     )
   }
 }
-
 
 const styles = StyleSheet.create({
   container: {

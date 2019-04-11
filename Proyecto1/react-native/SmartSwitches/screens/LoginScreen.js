@@ -53,6 +53,10 @@ export default class LoginScreen extends React.Component {
 
     }
 
+    _onRegisterPressed = () => {
+        this.props.navigation.navigate('Register');
+    }
+
 
     render() {
         return (
@@ -87,7 +91,7 @@ export default class LoginScreen extends React.Component {
                     <Text style={{ color: 'white' }}>Forgot your password?</Text>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.buttonContainer} >
+                <TouchableHighlight style={styles.buttonContainer} onPress={this._onRegisterPressed}>
                     <Text style={{ color: 'white' }}>Register</Text>
                 </TouchableHighlight>
             </View>
