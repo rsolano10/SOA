@@ -63,7 +63,6 @@ export default class LinkScreen extends React.Component {
             }}
               source={require('../assets/images/add.png')}
             />
-
           </TouchableHighlight>
         </View>
         <FlatList
@@ -88,12 +87,10 @@ export default class LinkScreen extends React.Component {
   }
 }
 
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#2080B7',
   },
-
   buttonContainer: {
     height: 45,
     flexDirection: 'row',
@@ -106,7 +103,6 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: "#00b5ec",
   },
-
   loginText: {
     color: 'white',
   },
