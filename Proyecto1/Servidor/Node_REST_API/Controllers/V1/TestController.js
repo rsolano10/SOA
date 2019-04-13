@@ -25,7 +25,7 @@ exports.testFunc = async function (req, res) { //Endpoint Function, can only han
             .get('http://192.168.1.23/nodeTest')
             .on('response', function (response) {
                 console.log(response.statusCode) // 200
-                console.log(response.headers['content-type']) // 'image/png'
+                console.log(response.headers['content-type'])
             });
         res.send('Some data');
     } catch (err) {
