@@ -25,7 +25,6 @@ export default class SettingsScreen extends React.Component {
     }
   }
 
-
   _onClickListener = () => {
     this.props.navigation.navigate('Login');
   }

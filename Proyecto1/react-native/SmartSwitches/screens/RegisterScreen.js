@@ -25,6 +25,7 @@ export default class RegisterPage extends Component {
       password: '',
     }
   }
+
   _handleUsernameChange = (event) => {
     this.setState({
       username: event.nativeEvent.text
@@ -57,7 +58,6 @@ export default class RegisterPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-
         <Text style={styles.headerText}>Create Account</Text>
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{ uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db' }} />
@@ -68,7 +68,6 @@ export default class RegisterPage extends Component {
             value={this.state.username}
             onChange={this._handleUsernameChange} />
         </View>
-
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{ uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db' }} />
           <TextInput style={styles.inputs}
@@ -78,7 +77,6 @@ export default class RegisterPage extends Component {
             value={this.state.password}
             onChange={this._handlePasswordChange} />
         </View>
-
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this._onClickListener}>
           <Text style={styles.signUpText}>Sign up</Text>
         </TouchableHighlight>

@@ -9,6 +9,7 @@ import {
   View,
   Image
 } from 'react-native';
+
 import SwitchesModal from './SwitchesModal'
 import { sendSwitchSignal } from '../networking/Server'
 
@@ -62,7 +63,6 @@ class FlatListItem extends Component {
             <Switch onValueChange={this._onSwitchClicked}
               value={this.state.switchValue} />
           </View>
-
         </View>
         <View style={{ height: 1, backgroundColor: 'gray' }}>
         </View>
