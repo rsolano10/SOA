@@ -1,15 +1,21 @@
 #include <SoftwareSerial.h>
 SoftwareSerial esp8266(3,2); 
 
+float Sensibilidad=0.139; //sensibilidad en V/A para nuestro sensor
+float offset=0.100; // Equivale a la amplitud del ruido
+float II;
+float IF;
+float IP;
+
 void setup()
-{
+{ 
  Serial.begin(9600);  // monitor serial del arduino
  esp8266.begin(9600); // baud rate del ESP8255
  
  pinMode(4,OUTPUT);
  pinMode(5,OUTPUT);
- digitalWrite(4,LOW);
- digitalWrite(5,LOW);
+ digitalWrite(4,HIGH);
+ digitalWrite(5,HIGH);
  
  sendData("AT+RST\r\n",2000);      // resetear módulo
  sendData("AT+CWMODE=1\r\n",1000); // configurar como cliente
@@ -38,16 +44,21 @@ void loop()
   //responder y cerrar la conexión para que el navegador no se quede cargando 
   // página web a enviar
   if (state==0) {
-   digitalWrite(4,HIGH);
+   digitalWrite(4,LOW); //encender switch 1
+   II = get_corriente();
   }
   if (state==1) {
-   digitalWrite(4,LOW);
+   digitalWrite(4,HIGH); //apagar switch 1
+   IF = get_corriente();
+   IP = (IF+II)/2;
+   Serial.print("Ip: ");
+   Serial.print(IP,3);
   }
   if (state==2) {
-   digitalWrite(5,HIGH);
+   digitalWrite(5,LOW); //encender switch 2
   }
   else { 
-   digitalWrite(5,LOW);
+   digitalWrite(5,HIGH); //apagar switch 2
   }
 
   String webpage = "ok";
@@ -68,6 +79,23 @@ void loop()
   sendData(comandoCerrar,3000);
   }
  }
+}
+
+float get_corriente()
+{
+  float voltajeSensor;
+  float corriente=0;
+  long tiempo=millis();
+  float Imax=0;
+  float Imin=0;
+  while(millis()-tiempo<500)//realizamos mediciones durante 0.5 segundos
+  { 
+    voltajeSensor = analogRead(A0) * (5.0 / 1023.0);//lectura del sensor
+    corriente=0.9*corriente+0.1*((voltajeSensor-2.527)/Sensibilidad); //Ecuación  para obtener la corriente
+    if(corriente>Imax)Imax=corriente;
+    if(corriente<Imin)Imin=corriente;
+  }
+  return(((Imax-Imin)/2)-offset);
 }
 
 /*

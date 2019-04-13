@@ -15,7 +15,7 @@ CREATE TABLE Users(
 
 CREATE TABLE Stats(
 	idStat int auto_increment,
-    currentStat int not null,
+    currentStat float not null,
     dateStat datetime not null,
     userStat varchar(20) not null,
     
