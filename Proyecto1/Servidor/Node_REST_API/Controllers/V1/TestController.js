@@ -19,16 +19,16 @@ exports.testFunc = async function (req, res) { //Endpoint Function, can only han
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With", "Content-Type, Accept");
 
     //Always surround with try/Catch
-    try{
+    try {
         logger.ReportAction("ActionDone");
         request
-        .get('http://192.168.1.23/nodeTest')
-        .on('response', function(response) {
-            console.log(response.statusCode) // 200
-            console.log(response.headers['content-type']) // 'image/png'
-        })
+            .get('http://192.168.1.23/nodeTest')
+            .on('response', function (response) {
+                console.log(response.statusCode) // 200
+                console.log(response.headers['content-type']) // 'image/png'
+            });
         res.send('Some data');
-    }catch(err){
+    } catch (err) {
         logger.ReportError(err);
         res.json({
             "errorInternalCode": envData.Errors.GenericCatchException,

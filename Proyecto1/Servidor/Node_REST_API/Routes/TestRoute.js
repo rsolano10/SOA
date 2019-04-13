@@ -6,7 +6,7 @@ module.exports = function (app) {
     var testController = require('../Controllers/' + process.env.VERSION_API + '/TestController');
 
     //Routing 
-    app.route('/api/' + process.env.VERSION_API + '/test') 
+    app.route('/api/' + process.env.VERSION_API + '/test')
         .get(testController.testFunc);
 
 };

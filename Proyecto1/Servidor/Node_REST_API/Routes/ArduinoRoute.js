@@ -6,7 +6,7 @@ module.exports = function (app) {
     var arduinoController = require('../Controllers/' + process.env.VERSION_API + '/ArduinoController');
 
     //Routing 
-    app.route('/api/' + process.env.VERSION_API + '/arduino') 
+    app.route('/api/' + process.env.VERSION_API + '/arduino')
         .post(arduinoController.controlSwitch);
 
 };
