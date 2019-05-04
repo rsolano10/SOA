@@ -1,9 +1,9 @@
 {
-  "packagerPort": 19001,
-  "packagerPid": 12984,
-  "expoServerNgrokUrl": "https://pk-4bv.anonymous.smartswitches.exp.direct",
-  "packagerNgrokUrl": "https://packager.pk-4bv.anonymous.smartswitches.exp.direct",
-  "ngrokPid": 13052,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "devToolsPort": 19002,
-  "expoServerPort": 19000
+  "expoServerPort": null
 }
