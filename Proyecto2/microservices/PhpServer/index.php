@@ -1,9 +1,4 @@
 <?php
-// Test this using following command
-// php -S localhost:8080 ./index.php &
-// curl http://localhost:8080 -d '{"query": "query { authUser(username: \"Fofo\", password: \"123\") }" }' &
-// curl http://localhost:8080 -d '{"query": "query { postUser(username: \"Fofo\", password: \"123\") }" }'
-
 // Project requirements
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -102,6 +97,34 @@ try {
 
                     //Bind parameters
                     $stmt->bind_param('ss',$password,$username);
+
+                    //Execute statement
+                    $stmt->execute();
+
+                    return $stmt->affected_rows;
+                }
+            ],
+            'deleteUser' => [
+                'type' => Type::int(),
+                'args' => [
+                    'username' => ['type' => Type::string()],
+                ],
+                'resolve' => function($root, $args) {
+                    $username = $args['username'];
+
+                    global $conn;
+                    
+                    //Set sql statement
+                    $sql = "DELETE FROM Users WHERE username = ?";
+
+                    //Prepare statement 
+                    $stmt     = $conn->prepare($sql);
+                    if(!$stmt) {
+                        echo 'Error: '.$conn->error;
+                    }
+
+                    //Bind parameters
+                    $stmt->bind_param('s',$username);
 
                     //Execute statement
                     $stmt->execute();
