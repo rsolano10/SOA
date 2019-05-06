@@ -1,0 +1,72 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: localhost
+apiEndpoints:
+  api:
+    host: localhost
+    paths: '/ip'
+  catalog:
+    host: localhost
+    paths: '/catalog'
+  users:
+    host: 'localhost'
+    paths: '/users'
+  orders:
+    host: 'localhost'
+    paths: '/orders'
+  
+serviceEndpoints:
+  httpbin:
+    url: 'https://httpbin.org'
+  httpCatalog:
+    url: 'http://localhost:5000/'
+  httpUsers:
+    url: 'http://localhost:8005/' #cambiar ip
+  httpOrders:
+    url: 'http://localhost:8008/' #cambiar ip
+policies:
+  - basic-auth
+  - cors
+  - expression
+  - key-auth
+  - log
+  - oauth2
+  - proxy
+  - rate-limit
+pipelines:
+  orders:
+    apiEndpoints:
+      - orders
+    policies:
+      - proxy:
+        - action:
+          serviceEndpoint: httpOrders
+          changeOrigin: true
+  users:
+    apiEndpoints:
+      - users
+    policies:
+      - proxy:
+        - action:
+          serviceEndpoint: httpUsers
+          changeOrigin: true
+  products:
+    apiEndpoints:
+      - catalog
+    policies:
+      - proxy:
+        - action:
+            serviceEndpoint: httpCatalog 
+            changeOrigin: true
+  ip:
+    apiEndpoints:
+      - api
+    policies:
+    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
+    # - key-auth:
+      - proxy:
+          - action:
+              serviceEndpoint: httpbin 
+              changeOrigin: true

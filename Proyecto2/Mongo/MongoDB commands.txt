@@ -1,0 +1,5 @@
+---- MongoDB ----
+$~ mongo 
+$~ use catalogDB // create a catalog data base
+$~ db.createCollection("products") // create a products "table"
+$~ db.products.insertOne({prodId:"123ab", name:"RAM 8GB", description:"memoria ram para laptop", stock:15, price:100}) // example for insertion
