@@ -65,7 +65,7 @@ pipelines:
       - api
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-    # - key-auth:
+      - key-auth:
       - proxy:
           - action:
               serviceEndpoint: httpbin 
