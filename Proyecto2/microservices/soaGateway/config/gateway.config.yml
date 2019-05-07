@@ -16,7 +16,7 @@ apiEndpoints:
   orders:
     host: 'localhost'
     paths: '/orders'
-  
+
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
@@ -35,6 +35,7 @@ policies:
   - oauth2
   - proxy
   - rate-limit
+  - jwt
 pipelines:
   orders:
     apiEndpoints:
@@ -56,17 +57,23 @@ pipelines:
     apiEndpoints:
       - catalog
     policies:
+      - jwt:
+        - action:
+            secret: "soa2019"
       - proxy:
         - action:
-            serviceEndpoint: httpCatalog 
+            serviceEndpoint: httpCatalog
             changeOrigin: true
   ip:
     apiEndpoints:
       - api
     policies:
     # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-      - key-auth:
+      #- key-auth:
+      - jwt:
+        - action:
+            secret: "soa2019"
       - proxy:
           - action:
-              serviceEndpoint: httpbin 
+              serviceEndpoint: httpbin
               changeOrigin: true
