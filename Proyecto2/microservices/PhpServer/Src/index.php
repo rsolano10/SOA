@@ -7,6 +7,12 @@ use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 use GraphQL\Type\Schema;
 use GraphQL\GraphQL;
+use Firebase\JWT\JWT;
+
+// JWT
+$time = time();
+$key = 'soa2019';
+
 
 // Connect to mysql
 $conn = new mysqli("localhost", "admin", "dubyduby", "SOA");
@@ -41,7 +47,23 @@ try {
                     $username = $args['username'];
                     $password = $args['password'];
                     $res = sql("SELECT idUser,username,pwd FROM Users WHERE username = '$username' AND pwd = '$password';")[0]['username'];
-                    return $res;
+                    if(isset($res)) {
+                        global $time;
+                        global $key;
+                        $token = array(
+                            'iat' => $time, // Tiempo que inició el token
+                            'exp' => $time + (60*60), // Tiempo que expirará el token (+1 hora)
+                            'data' => [ // información del usuario
+                                'name' => $username
+                            ]
+                        );
+                        $jwt = JWT::encode($token, $key);
+                        return $jwt;
+                    }
+                    else{
+                        return $res;
+                    }
+                    
                 }
             ],
             'postUser' => [
