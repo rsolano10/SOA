@@ -21,7 +21,7 @@ const OrderQuery = new GraphQLObjectType({
     orders: {
       type: new GraphQLList(OrderType),
       args: {},
-      resolve: async (parent, args) => {
+      resolve: async () => {
 
         const data = await OrderSQLModel.Orders
 
@@ -31,7 +31,7 @@ const OrderQuery = new GraphQLObjectType({
     order: {
       type: OrderType,
       args: { id: { type: GraphQLInt } },
-      resolve: async (parent, args) => {
+      resolve: async (args) => {
         const { id } = args
         let data = await OrderSQLModel.Order(id)
         return data
@@ -59,7 +59,6 @@ const OrderMutation = new GraphQLObjectType({
         products: { type: new GraphQLList(ProductInputType) }
       },
       resolve: async (parent, args) => {
-        console.log("Prueba")
         const { userName, products } = args
 
         const order = { username: userName, date: new Date() };
@@ -80,7 +79,7 @@ const OrderMutation = new GraphQLObjectType({
         userName: { type: GraphQLString },
         products: { type: new GraphQLList(ProductInputType) }
       },
-      resolve: async (parent, args) => {
+      resolve: async (args) => {
         const { id, userName, products } = args
 
         const updatedOrder = await OrderSQLModel.UpdateOrder(id, { userName })
@@ -96,7 +95,7 @@ const OrderMutation = new GraphQLObjectType({
       args: {
         id: { type: GraphQLInt }
       },
-      resolve: async (parent, args) => {
+      resolve: async (args) => {
         const { id } = args
 
         await OrderSQLModel.DeleteProducts(id)

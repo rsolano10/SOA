@@ -1,18 +1,17 @@
-FROM ubuntu
+FROM ubuntu:18.04
 
-MAINTAINER ceteam
+WORKDIR /usr/src/serverphp
+
+COPY . /usr/src/serverphp
 
 RUN apt-get update
-RUN echo "Hello DockerFile World"
 
-RUN cd /usr
+RUN apt-get install php7.0 -yq
 
-RUN mkdir /usr/Server
+RUN apt install composer -yq
 
-ADD Src /usr/Server
+RUN apt-get install php-mysql -yq 
 
+RUN apt install php-mbstring -yq
 
-RUN ["chmod", "+x", "/usr/Server/run.sh"]
-
-ENTRYPOINT ["top", "-b"]
-CMD ["-c"]
+CMD [ "php", "-S", "0.0.0.0:8008", "./src/index.php" ]
