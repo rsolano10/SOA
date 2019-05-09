@@ -5,27 +5,27 @@ admin:
   host: localhost
 apiEndpoints:
   api:
-    host: localhost
+    host: '*'
     paths: '/ip'
   catalog:
-    host: localhost
+    host: '*'
     paths: '/catalog'
-  users:
-    host: 'localhost'
-    paths: ''
   orders:
-    host: 'localhost'
-    paths: '/graphiql'
+    host: '*'
+    paths: '/orders'
+  users:
+    host: '*'
+    paths: '/users'
 
 serviceEndpoints:
   httpbin:
     url: 'https://httpbin.org'
   httpCatalog:
-    url: 'http://192.168.1.117:5000/'
-  httpUsers:
-    url: 'http://localhost:8081/' #cambiar ip
+    url: 'http://localhost:5000/'
   httpOrders:
-    url: 'http://localhost:8080/' #cambiar ip
+    url: 'http://localhost:8005/' #cambiar ip
+  httpUsers:
+    url: 'http://localhost:8008/' #cambiar ip
 policies:
   - basic-auth
   - cors
@@ -37,22 +37,17 @@ policies:
   - rate-limit
   - jwt
 pipelines:
-  orders:
+  orders1:
     apiEndpoints:
       - orders
     policies:
+      - jwt:
+        - action:
+            secret: "soa2019"
       - proxy:
         - action:
-          serviceEndpoint: httpOrders
-          changeOrigin: true
-  users:
-    apiEndpoints:
-      - users
-    policies:
-      - proxy:
-        - action:
-          serviceEndpoint: httpUsers
-          changeOrigin: true
+            serviceEndpoint: httpOrders
+            changeOrigin: true
   products:
     apiEndpoints:
       - catalog
@@ -68,8 +63,6 @@ pipelines:
     apiEndpoints:
       - api
     policies:
-    # Uncomment `key-auth:` when instructed to in the Getting Started guide.
-      #- key-auth:
       - jwt:
         - action:
             secret: "soa2019"
@@ -77,3 +70,11 @@ pipelines:
           - action:
               serviceEndpoint: httpbin
               changeOrigin: true
+  users:
+    apiEndpoints:
+      - users
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: httpUsers
+              schangeOrigin: true
