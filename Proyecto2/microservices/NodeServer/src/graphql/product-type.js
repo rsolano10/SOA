@@ -5,7 +5,7 @@ const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLFloat } = graphql
 const ProductType = new GraphQLObjectType({
     name:'Product',
     fields: () => ({
-        productId: { type: GraphQLString },
+        code: { type: GraphQLString },
         price: { type: GraphQLFloat },
         quantity: { type: GraphQLInt }
     })

@@ -1,6 +1,8 @@
 const graphql = require('graphql')
+
 const OrderType = require('./order-type')
 const OrderMySQL = require('../models/mysql/order')
+
 const OrderSQLModel = new OrderMySQL();
 
 const {
@@ -20,7 +22,9 @@ const OrderQuery = new GraphQLObjectType({
       type: new GraphQLList(OrderType),
       args: {},
       resolve: async (parent, args) => {
+
         const data = await OrderSQLModel.Orders
+
         return data
       }
     },
@@ -55,13 +59,17 @@ const OrderMutation = new GraphQLObjectType({
         products: { type: new GraphQLList(ProductInputType) }
       },
       resolve: async (parent, args) => {
+        console.log("Prueba")
         const { userName, products } = args
+
         const order = { username: userName, date: new Date() };
+
         const addOrder = await OrderSQLModel.InsertOrder(order)
         const { insertId } = ret
         for (const product of products) {
           await OrderSQLModel.InsertProduct(insertId, product)
         }
+
         return addOrder;
       }
     },
@@ -74,10 +82,12 @@ const OrderMutation = new GraphQLObjectType({
       },
       resolve: async (parent, args) => {
         const { id, userName, products } = args
+
         const updatedOrder = await OrderSQLModel.UpdateOrder(id, { userName })
         for (const product of products) {
           await OrderSQLModel.UpdateProduct(id, product)
         }
+
         return updatedOrder;
       }
     },
@@ -88,8 +98,10 @@ const OrderMutation = new GraphQLObjectType({
       },
       resolve: async (parent, args) => {
         const { id } = args
+
         await OrderSQLModel.DeleteProducts(id)
         const deletedOrder = await OrderSQLModel.DeleteOrder(id)
+
         return deletedOrder;
       }
     }

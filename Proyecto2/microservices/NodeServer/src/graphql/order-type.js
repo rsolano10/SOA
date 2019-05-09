@@ -1,7 +1,7 @@
 const graphql = require('graphql')
 const ProductType = require('./product-type')
 
-const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt } = graphql
+const { GraphQLObjectType, GraphQLString, GraphQLList, GraphQLInt, GraphQLFloat } = graphql
 
 const OrderType = new GraphQLObjectType({
   name: 'Order',
