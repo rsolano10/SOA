@@ -8,7 +8,7 @@ const schema = require('./graphql/schema')
 // Create a server with a host and port
 const server = Hapi.server({
   host: "localhost",
-  port: 8080
+  port: 8005
 });
 
 // Start the server
@@ -17,7 +17,7 @@ const start = async function () {
     await server.register({
       plugin: graphiqlHapi,
       options: {
-        path: '/graphiql',
+        path: '/orders',
         graphiqlOptions: {
           endpointURL: '/graphql'
         },
