@@ -15,7 +15,7 @@ $key = 'soa2019';
 
 
 // Connect to mysql
-$sqlip = "192.168.1.101:3306";
+$sqlip = "192.168.1.9:3306";
 $conn = new mysqli($sqlip, "phpadmin", "dubyduby", "SOA");
 
 // Database connection verification
