@@ -1,0 +1,3 @@
+sudo docker build --rm -t php2 .
+sudo docker run -itd --privileged -p 8010:8008 --name=php2 php2
+sudo docker exec -t -i php2 /bin/bash
