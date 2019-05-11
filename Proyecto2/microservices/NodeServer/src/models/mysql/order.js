@@ -1,4 +1,4 @@
-const db = require('./db').default
+const db = require('./db')
 
 class Order {
 
