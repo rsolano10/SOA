@@ -13,10 +13,10 @@ import * as firebase from 'firebase';
 
 import i18n from '../src/i18n';
 
-export default class RegisterScreen extends React.Component {
+export default class LoginScreen extends React.Component {
 
     static navigationOptions = () => ({
-        title: i18n.t('Registro'),
+        title: i18n.t('Auth'),
         headerTintColor: 'white',
         headerStyle: {
             backgroundColor: 'red'
@@ -26,7 +26,6 @@ export default class RegisterScreen extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            fullName: '',
             email: '',
             password: '',
         }
@@ -38,8 +37,8 @@ export default class RegisterScreen extends React.Component {
             //this.props.navigation.navigate('Main');
             firebase
                 .auth()
-                .createUserWithEmailAndPassword(this.state.email, this.state.password)
-                .then(() => this.props.navigation.navigate('Login'))
+                .signInWithEmailAndPassword(this.state.email, this.state.password)
+                .then(() => this.props.navigation.navigate('MainMenu'))
                 .catch(error => alert(error))
         }
         else {
@@ -47,18 +46,21 @@ export default class RegisterScreen extends React.Component {
         }
     }
 
+    signout = async () => {
+        firebase.auth().signOut().then(function () {
+            alert(i18n.t("signedout"));
+        }, function (error) {
+            console.error('Sign Out Error', error);
+        });
+    }
+
+    sign_in = async () => {
+        this.props.navigation.navigate('Auth')
+    }
+
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.inputContainer}>
-                    <Image style={styles.inputIcon} source={{ uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db' }} />
-                    <TextInput style={styles.inputs}
-                        placeholder={i18n.t('Nombre')}
-                        keyboardType="default"
-                        underlineColorAndroid='transparent'
-                        onChangeText={(fullName) => this.setState({ fullName })} />
-                </View>
-
                 <View style={styles.inputContainer}>
                     <Image style={styles.inputIcon} source={{ uri: 'https://png.icons8.com/message/ultraviolet/50/3498db' }} />
                     <TextInput style={styles.inputs}
@@ -76,9 +78,16 @@ export default class RegisterScreen extends React.Component {
                         underlineColorAndroid='transparent'
                         onChangeText={(password) => this.setState({ password })} />
                 </View>
+                <TouchableHighlight onPress={() => this.sign_in()}>
+                    <Text style={styles.signUpText}>{i18n.t('Registrarse')}</Text>
+                </TouchableHighlight>
 
                 <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-                    <Text style={styles.signUpText}>{i18n.t('Registrarse')}</Text>
+                    <Text style={styles.signUpText}>{i18n.t('Autenticar')}</Text>
+                </TouchableHighlight>
+
+                <TouchableHighlight style={[styles.buttonContainer, styles.signoutButton]} onPress={() => this.signout()}>
+                    <Text style={styles.signUpText}>{i18n.t('Logout')}</Text>
                 </TouchableHighlight>
             </View>
         );
@@ -116,6 +125,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     buttonContainer: {
+        marginTop: 20,
         height: 45,
         flexDirection: 'row',
         justifyContent: 'center',
@@ -126,6 +136,9 @@ const styles = StyleSheet.create({
     },
     signupButton: {
         backgroundColor: "#B39292",
+    },
+    signoutButton: {
+        backgroundColor: "red",
     },
     signUpText: {
         color: 'white',

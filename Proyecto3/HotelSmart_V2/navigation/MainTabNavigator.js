@@ -5,21 +5,24 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import HotelServiciosScreen from '../screens/HotelServiciosScreen';
+import HotelActividadesScreen from '../screens/HotelActividadesScreen';
+
+import i18n from '../src/i18n';
 
 const HomeStack = createStackNavigator({
   Home: HomeScreen,
 });
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Home',
+  tabBarLabel: i18n.t('Habitaciones'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
       name={
         Platform.OS === 'ios'
-          ? `ios-information-circle${focused ? '' : '-outline'}`
-          : 'md-information-circle'
+          ? `ios-create${focused ? '' : '-outline'}`
+          : 'md-create'
       }
     />
   ),
@@ -30,31 +33,56 @@ const LinksStack = createStackNavigator({
 });
 
 LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+  tabBarLabel: i18n.t('Hotel'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'}
+      name={Platform.OS === 'ios' ? 'ios-home' : 'md-home'}
     />
   ),
 };
 
 const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
+  Settings: HotelServiciosScreen,
 });
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: i18n.t('Servicios'),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
-      name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'}
+      name={Platform.OS === 'ios' ? 'ios-crop' : 'md-crop'}
     />
   ),
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
+const ActividadesStack = createStackNavigator({
+  HotelActividades: HotelActividadesScreen,
 });
+
+ActividadesStack.navigationOptions = {
+  tabBarLabel: i18n.t('Actividades'),
+  tabBarIcon: ({ focused }) => (
+    <TabBarIcon
+      focused={focused}
+      name={Platform.OS === 'ios' ? 'ios-bookmarks' : 'md-bookmarks'}
+    />
+  ),
+};
+
+const MainTab = createBottomTabNavigator({
+  LinksStack,
+  HomeStack,
+  SettingsStack,
+  ActividadesStack
+});
+
+MainTab.navigationOptions = {
+  title: i18n.t('InfoHotel'),
+  headerTintColor: 'white',
+  headerStyle: {
+      backgroundColor: 'red'
+  },
+}
+
+export default MainTab;
