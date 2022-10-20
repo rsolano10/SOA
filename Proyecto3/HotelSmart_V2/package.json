@@ -13,7 +13,7 @@
   "dependencies": {
     "@expo/samples": "2.1.1",
     "@sanity/client": "^0.140.32",
-    "expo": "^32.0.0",
+    "expo": "^46.0.16",
     "firebase": "^6.1.1-0",
     "i18n-js": "^3.3.0",
     "react": "16.5.0",
